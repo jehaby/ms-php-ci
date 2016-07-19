@@ -34,5 +34,6 @@ RUN cd /usr/src/php/ext \
     && curl -q https://codeload.github.com/phpredis/phpredis/tar.gz/$PHPREDIS_VERSION | tar -xz \
     && docker-php-ext-install phpredis-$PHPREDIS_VERSION
 
+
 USER user-from-host
 WORKDIR /var/www
