@@ -10,9 +10,11 @@ RUN apt-get update \
     && pecl install \
              apcu \
              imagick \
+	     redis \
     && docker-php-ext-enable \
              apcu \
              imagick \
+	     redis \	     
     && docker-php-ext-install \
             dom \
             pdo_pgsql \
@@ -29,11 +31,6 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && chmod a+x /usr/bin/composer
 
 RUN adduser --disabled-password --gecos "" --uid 1000 user-from-host
-
-ENV PHPREDIS_VERSION=3.0.0
-RUN cd /usr/src/php/ext \
-    && curl -q https://codeload.github.com/phpredis/phpredis/tar.gz/$PHPREDIS_VERSION | tar -xz \
-    && docker-php-ext-install phpredis-$PHPREDIS_VERSION
 
 USER user-from-host
 WORKDIR /var/www
